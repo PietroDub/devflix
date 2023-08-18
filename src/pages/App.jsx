@@ -1,31 +1,32 @@
-import { useEffect ,} from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import logo from "../assets/devflix.png";
 import searchIcon from "../assets/search.svg";
 import "./App.css";
-import { useState } from "react";
 import MovieCard from "../components/movieCard/movieCard";
 
 const App = () => {
-    const [searchTerm,setSearchTerm] = useState("");
-    const [movies, setMovies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [movies, setMovies] = useState([]);
+
   const apiKey = "e4d577fa";
   const apiUrl = `https://omdbapi.com/?apikey=${apiKey}`;
 
   useEffect(() => {
-    searchMovies("Black Clover");
+    searchMovies("Black clover");
   }, []);
 
-  const searchMovies = async ({title}) => {
-const response = await fetch(`${apiUrl}&s=${title}`)
-const data = await response.json();
+  const searchMovies = async ( title ) => {
+    const response = await fetch(`${apiUrl}&s=${title}`);
+    const data = await response.json();
 
-console.log(data);
-setMovies (data.Search);
+    console.log(data.Search);
+    setMovies(data.Search);
   };
   const handleKeyPress = (e) => {
-    e === "Enter" && searchMovies(searchTerm)
-    searchMovies(searchTerm)
-  }
+    e === "Enter" && searchMovies(searchTerm);
+    searchMovies(searchTerm);
+  };
 
   //fetch(apiUrl)
   // .then((Response) => Response.json())
@@ -43,23 +44,23 @@ setMovies (data.Search);
           onKeyDown={handleKeyPress}
           placeholder="Pesquisar por filmes"
         />
-        <img 
-        src={searchIcon} 
-        alt="Icone de pesquisa"
-        onClick={() => searchMovies(searchTerm)} 
+        <img
+          src={searchIcon}
+          alt="Icone de pesquisa"
+          onClick={() => searchMovies(searchTerm)}
         />
       </div>
       {movies?.length > 0 ? (
         <div className="container">
-        {movies.map((movie) => (
-        <MovieCard key={movie.imdbID} movies={movie} />
-         ))}
+          {movies.map((movie) => (
+            <MovieCard key={movie.imdbID} movies={movie} />
+          ))}
         </div>
       ) : (
         <div className="empty">
           <h2>Nenhum filme encontrado 😏</h2>
-          </div>
-        )}
+        </div>
+      )}
     </div>
   );
 };
