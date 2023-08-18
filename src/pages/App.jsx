@@ -13,7 +13,7 @@ const App = () => {
   const apiUrl = `https://omdbapi.com/?apikey=${apiKey}`;
 
   useEffect(() => {
-    searchMovies("Black clover");
+    searchMovies("Batman");
   }, []);
 
   const searchMovies = async ( title ) => {
