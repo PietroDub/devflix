@@ -4,6 +4,7 @@ import logo from "../assets/devflix.png";
 import searchIcon from "../assets/search.svg";
 import "./App.css";
 import MovieCard from "../components/movieCard/movieCard";
+import Footer from "../components/footer/footer";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,7 +17,7 @@ const App = () => {
     searchMovies("Batman");
   }, []);
 
-  const searchMovies = async ( title ) => {
+  const searchMovies = async (title) => {
     const response = await fetch(`${apiUrl}&s=${title}`);
     const data = await response.json();
 
@@ -61,6 +62,7 @@ const App = () => {
           <h2>Nenhum filme encontrado 😏</h2>
         </div>
       )}
+      <Footer link={"https:github.com.br"}>Pietro/</Footer>
     </div>
   );
 };
